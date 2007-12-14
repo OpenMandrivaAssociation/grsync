@@ -1,5 +1,5 @@
 %define name grsync
-%define version 0.6
+%define version 0.6.1
 %define release %mkrel 1
 
 %define summary Grsync is a GUI (Graphical User Interface) for rsync
@@ -17,18 +17,19 @@ BuildRequires:  pkgconfig
 BuildRequires:  gtk+2-devel perl-XML-Parser desktop-file-utils
 BuildRequires:  dos2unix
 %description
-Grsync is a GUI (Graphical User Interface) for rsync, the commandline 
-directory synchronization tool. It makes use of the GTK2 libraries and 
-it is released under the GPL2. It is in beta stage and it supports only 
-a limited set of rsync features, but can be effectively used to 
-synchronize local directories. Only sources are available as of now, 
+Grsync is a GUI (Graphical User Interface) for rsync, the commandline
+directory synchronization tool. It makes use of the GTK2 libraries and
+it is released under the GPL2. It is in beta stage and it supports only
+a limited set of rsync features, but can be effectively used to
+synchronize local directories. Only sources are available as of now,
 they can be compiled on various flavours of unices having gtk and autotools,
-but it should be possible to compile it under win too. Some ready-made 
+but it should be possible to compile it under win too. Some ready-made
 packages for linux distributions have been made by third parties.
 
 %prep
 %setup -q
 
+perl -p -i -e 's/grsync.png/grsync/g' grsync.desktop
 
 %build
 %configure2_5x
@@ -70,11 +71,11 @@ dos2unix NEWS AUTHORS README
 rm -rf $RPM_BUILD_ROOT
 
 
-%post 
-%{update_menus} 
+%post
+%{update_menus}
 
 
-%postun 
+%postun
 %{clean_menus}
 
 
