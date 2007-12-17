@@ -12,7 +12,6 @@ License: GPL
 Group: Networking/File transfer
 URL: http://www.opbyte.it/grsync/
 Source0: %{name}-%{version}.tar.bz2
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildRequires:  pkgconfig
 BuildRequires:  gtk+2-devel perl-XML-Parser desktop-file-utils
 BuildRequires:  dos2unix
