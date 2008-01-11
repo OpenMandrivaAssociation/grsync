@@ -44,17 +44,6 @@ install -m644 pixmaps/%{name}.png -D $RPM_BUILD_ROOT%{_miconsdir}/%{name}.png
 install -m644 pixmaps/%{name}.png -D $RPM_BUILD_ROOT%{_iconsdir}/%{name}.png
 install -m644 pixmaps/%{name}.png -D $RPM_BUILD_ROOT%{_liconsdir}/%{name}.png
 
-mkdir -p $RPM_BUILD_ROOT%{_menudir}
-cat > $RPM_BUILD_ROOT%{_menudir}/%{name} << EOF
-?package(%name): \
-command="%{_bindir}/%{name}" \
-needs="X11" \
-icon="%{name}.png" \
-section="Internet/File Transfer" \
-title="Grsync" \
-longtitle="%{summary}" \
-xdg="true"
-EOF
 
 desktop-file-install --vendor="" \
   --remove-category="Application" \
@@ -87,7 +76,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/pixmaps/grsync.png
 %{_mandir}/*/*
-%{_menudir}/%{name}
 %{_miconsdir}/%{name}.png
 %{_iconsdir}/%{name}.png
 %{_liconsdir}/%{name}.png
