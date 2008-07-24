@@ -1,6 +1,6 @@
 %define name grsync
 %define version 0.6.1
-%define release %mkrel 1
+%define release %mkrel 3
 
 %define summary Grsync is a GUI (Graphical User Interface) for rsync
 
