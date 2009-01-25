@@ -1,6 +1,12 @@
+
+# http://wiki.mandriva.com/en/Development/Packaging/Problems
+# allow the compilation 
+%define Werror_cflags %nil
+
+
 %define name grsync
-%define version 0.6.1
-%define release %mkrel 3
+%define version 0.6.2
+%define release %mkrel 1
 
 %define summary Grsync is a GUI (Graphical User Interface) for rsync
 
@@ -11,7 +17,7 @@ Release: %{release}
 License: GPL
 Group: Networking/File transfer
 URL: http://www.opbyte.it/grsync/
-Source0: %{name}-%{version}.tar.bz2
+Source0: %{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildRequires:  pkgconfig
 BuildRequires:  gtk+2-devel perl-XML-Parser desktop-file-utils
