@@ -5,7 +5,7 @@
 
 
 %define name grsync
-%define version 0.6.2
+%define version 0.9.0
 %define release %mkrel 1
 
 %define summary Grsync is a GUI (Graphical User Interface) for rsync
@@ -85,6 +85,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/%{name}-batch
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/pixmaps/grsync.png
+%{_datadir}/grsync/grsync.glade
 %{_mandir}/*/*
 %{_miconsdir}/%{name}.png
 %{_iconsdir}/%{name}.png
