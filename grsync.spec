@@ -22,6 +22,8 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildRequires:  pkgconfig
 BuildRequires:  gtk+2-devel perl-XML-Parser desktop-file-utils
 BuildRequires:  dos2unix
+BuildRequires:	intltool
+
 %description
 Grsync is a GUI (Graphical User Interface) for rsync, the commandline
 directory synchronization tool. It makes use of the GTK2 libraries and
