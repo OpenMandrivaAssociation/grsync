@@ -1,84 +1,80 @@
-Name: 	 grsync
-Version: 0.9.1
-Summary: Grsync is a GUI (Graphical User Interface) for rsync
-Release: %mkrel 1
-License: GPL
-Group: Networking/File transfer
-URL: http://www.opbyte.it/grsync/
-Source0: http://www.opbyte.it/release/%{name}-%{version}.tar.gz
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
-BuildRequires:  pkgconfig
-BuildRequires:  gtk+2-devel perl-XML-Parser desktop-file-utils
-BuildRequires:  dos2unix
+Name:		grsync
+Version:	0.9.1
+Summary:	A GTK GUI for rsync
+Release:	%mkrel 2
+License:	GPLv2
+Group:		File tools
+URL:		http://www.opbyte.it/grsync/
+Source0:	http://www.opbyte.it/release/%{name}-%{version}.tar.gz
+BuildRequires:	pkgconfig
+BuildRequires:	gtk+2-devel
+BuildRequires:	perl-XML-Parser
+BuildRequires:	desktop-file-utils
+BuildRequires:	dos2unix
 BuildRequires:	intltool
+BuildRequires:	imagemagick
+Requires:	rsync
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
 
 %description
-Grsync is a GUI (Graphical User Interface) for rsync, the commandline
-directory synchronization tool. It makes use of the GTK2 libraries and
-it is released under the GPL2. It is in beta stage and it supports only
-a limited set of rsync features, but can be effectively used to
-synchronize local directories. Only sources are available as of now,
-they can be compiled on various flavours of unices having gtk and autotools,
-but it should be possible to compile it under win too. Some ready-made
-packages for linux distributions have been made by third parties.
+Grsync is a GUI for rsync, the command line directory
+synchronization tool. While it can work with remote
+hosts, its focus is to synchronize local directories.
 
 %prep
 %setup -q
 
+# Fix desktop file
 perl -p -i -e 's/grsync.png/grsync/g' grsync.desktop
 
 %build
 %configure2_5x
 %make
 
-
 %install
-rm -rf $RPM_BUILD_ROOT
-%makeinstall
+rm -rf %{buildroot}
+%makeinstall_std
 
-install -m644 pixmaps/%{name}.png -D $RPM_BUILD_ROOT%{_miconsdir}/%{name}.png
-install -m644 pixmaps/%{name}.png -D $RPM_BUILD_ROOT%{_iconsdir}/%{name}.png
-install -m644 pixmaps/%{name}.png -D $RPM_BUILD_ROOT%{_liconsdir}/%{name}.png
+# Generate and install icons
+mkdir -p %{buildroot}%{_iconsdir}/hicolor/{64x64,32x32,16x16,128x128}/apps
+convert -scale 64 pixmaps/%{name}.png %{buildroot}%{_iconsdir}/hicolor/64x64/apps/%{name}.png
+convert -scale 32 pixmaps/%{name}.png %{buildroot}%{_iconsdir}/hicolor/32x32/apps/%{name}.png
+convert -scale 16 pixmaps/%{name}.png %{buildroot}%{_iconsdir}/hicolor/16x16/apps/%{name}.png
+install -D -m644 pixmaps/%{name}.png %{buildroot}%{_iconsdir}/hicolor/128x128/apps/
 
-
+# Desktop file
 desktop-file-install --vendor="" \
   --remove-category="Application" \
   --add-category="GTK" \
-  --add-category="FileTransfer" \
-  --add-category="X-MandrivaLinux-Internet-FileTransfer" \
-  --dir $RPM_BUILD_ROOT%{_datadir}/applications $RPM_BUILD_ROOT%{_datadir}/applications/*
+  --add-category="Filesystem" \
+  --add-category="X-MandrivaLinux-System-FileTools" \
+  --dir %{buildroot}%{_datadir}/applications %{buildroot}%{_datadir}/applications/*
 
 %find_lang %{name}
 
+# Fix EOLs
 dos2unix NEWS AUTHORS README
 
 %clean
-rm -rf $RPM_BUILD_ROOT
-
+rm -rf %{buildroot}
 
 %if %mdkversion < 200900
 %post
+%{update_icon_cache hicolor}
 %{update_menus}
-%endif
 
-
-%if %mdkversion < 200900
 %postun
+%{clean_icon_cache hicolor}
 %{clean_menus}
 %endif
 
-
 %files -f %{name}.lang
 %defattr(-,root,root,-)
-%doc AUTHORS COPYING INSTALL NEWS README
-%{_bindir}/%{name}
-%{_bindir}/%{name}-batch
+%doc AUTHORS COPYING NEWS README
+%{_bindir}/%{name}*
 %{_datadir}/applications/%{name}.desktop
-%{_datadir}/pixmaps/grsync.png
-%{_datadir}/grsync/grsync.glade
-%{_mandir}/*/*
-%{_miconsdir}/%{name}.png
-%{_iconsdir}/%{name}.png
-%{_liconsdir}/%{name}.png
-
+%{_datadir}/pixmaps/%{name}.png
+%{_datadir}/%{name}
+%{_mandir}/man1/%{name}*
+%{_iconsdir}/hicolor/*/apps/%{name}.png
 
