@@ -1,5 +1,5 @@
 Name:		grsync
-Version:	0.9.3
+Version:	1.0.0
 Summary:	A GTK GUI for rsync
 Release:	%mkrel 1
 License:	GPLv2
