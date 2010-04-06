@@ -1,5 +1,5 @@
 Name:		grsync
-Version:	1.0.0
+Version:	1.1.0
 Summary:	A GTK GUI for rsync
 Release:	%mkrel 1
 License:	GPLv2
@@ -74,6 +74,9 @@ rm -rf %{buildroot}
 %{_bindir}/%{name}*
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/pixmaps/%{name}.png
+%{_datadir}/mime/packages/grsync.xml
+%{_datadir}/icons/hicolor/48x48/mimetypes/application-x-grsync-session.png
+%{_datadir}/pixmaps/grsync-busy.png
 %{_datadir}/%{name}
 %{_mandir}/man1/%{name}*
 %{_iconsdir}/hicolor/*/apps/%{name}.png
