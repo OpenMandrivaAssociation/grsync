@@ -6,6 +6,7 @@ License:	GPLv2
 Group:		File tools
 URL:		http://www.opbyte.it/grsync/
 Source0:	http://www.opbyte.it/release/%{name}-%{version}.tar.gz
+Patch0:		grsync-1.0.0-dsofix.patch
 BuildRequires:	pkgconfig
 BuildRequires:	gtk+2-devel
 BuildRequires:	perl-XML-Parser
@@ -23,6 +24,7 @@ hosts, its focus is to synchronize local directories.
 
 %prep
 %setup -q
+%patch0 -p1 -b .dsofix
 
 %build
 %configure2_5x
