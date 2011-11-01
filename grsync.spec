@@ -1,5 +1,5 @@
 Name:		grsync
-Version:	1.1.1
+Version:	1.2.0
 Summary:	A GTK GUI for rsync
 Release:	%mkrel 1
 License:	GPLv2
@@ -24,9 +24,6 @@ hosts, its focus is to synchronize local directories.
 %prep
 %setup -q
 
-# Fix desktop file
-perl -p -i -e 's/grsync.png/grsync/g' grsync.desktop
-
 %build
 %configure2_5x
 %make
@@ -43,9 +40,9 @@ convert -scale 16 pixmaps/%{name}.png %{buildroot}%{_iconsdir}/hicolor/16x16/app
 install -D -m644 pixmaps/%{name}.png %{buildroot}%{_iconsdir}/hicolor/128x128/apps/
 
 # Desktop file
+perl -p -i -e 's/grsync.png/grsync/g' %{buildroot}%{_datadir}/applications/%{name}.desktop
 desktop-file-install --vendor="" \
   --remove-category="Application" \
-  --add-category="GTK" \
   --add-category="Filesystem" \
   --add-category="X-MandrivaLinux-System-FileTools" \
   --dir %{buildroot}%{_datadir}/applications %{buildroot}%{_datadir}/applications/*
