@@ -1,7 +1,7 @@
 Name:		grsync
-Version:	1.2.0
-Summary:	A GTK GUI for rsync
+Version:	1.2.1
 Release:	%mkrel 1
+Summary:	A GTK GUI for rsync
 License:	GPLv2
 Group:		File tools
 URL:		http://www.opbyte.it/grsync/
@@ -15,7 +15,6 @@ BuildRequires:	dos2unix
 BuildRequires:	intltool
 BuildRequires:	imagemagick
 Requires:	rsync
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
 
 %description
 Grsync is a GUI for rsync, the command line directory
@@ -27,22 +26,22 @@ hosts, its focus is to synchronize local directories.
 %patch0 -p1 -b .dsofix
 
 %build
-%configure2_5x
+%configure2_5x --disable-unity
 %make
 
 %install
-rm -rf %{buildroot}
+%__rm -rf %{buildroot}
 %makeinstall_std
 
 # Generate and install icons
-mkdir -p %{buildroot}%{_iconsdir}/hicolor/{64x64,32x32,16x16,128x128}/apps
+%__mkdir_p %{buildroot}%{_iconsdir}/hicolor/{64x64,32x32,16x16,128x128}/apps
 convert -scale 64 pixmaps/%{name}.png %{buildroot}%{_iconsdir}/hicolor/64x64/apps/%{name}.png
 convert -scale 32 pixmaps/%{name}.png %{buildroot}%{_iconsdir}/hicolor/32x32/apps/%{name}.png
 convert -scale 16 pixmaps/%{name}.png %{buildroot}%{_iconsdir}/hicolor/16x16/apps/%{name}.png
-install -D -m644 pixmaps/%{name}.png %{buildroot}%{_iconsdir}/hicolor/128x128/apps/
+%__install -D -m644 pixmaps/%{name}.png %{buildroot}%{_iconsdir}/hicolor/128x128/apps/
 
 # Desktop file
-perl -p -i -e 's/grsync.png/grsync/g' %{buildroot}%{_datadir}/applications/%{name}.desktop
+%__perl -p -i -e 's/grsync.png/grsync/g' %{buildroot}%{_datadir}/applications/%{name}.desktop
 desktop-file-install --vendor="" \
   --remove-category="Application" \
   --add-category="Filesystem" \
@@ -55,20 +54,9 @@ desktop-file-install --vendor="" \
 dos2unix NEWS AUTHORS README
 
 %clean
-rm -rf %{buildroot}
-
-%if %mdkversion < 200900
-%post
-%{update_icon_cache hicolor}
-%{update_menus}
-
-%postun
-%{clean_icon_cache hicolor}
-%{clean_menus}
-%endif
+%__rm -rf %{buildroot}
 
 %files -f %{name}.lang
-%defattr(-,root,root,-)
 %doc AUTHORS COPYING NEWS README
 %{_bindir}/%{name}*
 %{_datadir}/applications/%{name}.desktop
