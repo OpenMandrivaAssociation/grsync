@@ -1,5 +1,5 @@
 Name:		grsync
-Version:	1.2.6
+Version:	1.3.0
 Release:	1
 Summary:	A GTK GUI for rsync
 License:	GPLv2
@@ -7,7 +7,7 @@ Group:		File tools
 URL:		http://www.opbyte.it/grsync/
 Source0:	http://www.opbyte.it/release/%{name}-%{version}.tar.gz
 BuildRequires:	pkgconfig
-BuildRequires:	gtk+2.0-devel
+BuildRequires:	pkgconfig(gtk+-3.0)
 BuildRequires:	perl-XML-Parser
 BuildRequires:	desktop-file-utils
 BuildRequires:	dos2unix
@@ -24,12 +24,11 @@ hosts, its focus is to synchronize local directories.
 %setup -q
 
 %build
-%configure2_5x --disable-unity
-%make
+%configure --disable-unity
+%make_build
 
 %install
-%__rm -rf %{buildroot}
-%makeinstall_std
+%make_install
 
 # Generate and install icons
 %__mkdir_p %{buildroot}%{_iconsdir}/hicolor/{64x64,32x32,16x16,128x128}/apps
@@ -46,16 +45,14 @@ desktop-file-install --vendor="" \
   --add-category="X-MandrivaLinux-System-FileTools" \
   --dir %{buildroot}%{_datadir}/applications %{buildroot}%{_datadir}/applications/*
 
-%find_lang %{name}
-
 # Fix EOLs
 dos2unix NEWS AUTHORS README
 
-%clean
-%__rm -rf %{buildroot}
+
+%find_lang %{name}
 
 %files -f %{name}.lang
-%doc AUTHORS COPYING NEWS README
+%doc AUTHORS NEWS README
 %{_bindir}/%{name}*
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/pixmaps/%{name}.png
@@ -65,5 +62,4 @@ dos2unix NEWS AUTHORS README
 %{_datadir}/%{name}
 %{_mandir}/man1/%{name}*
 %{_iconsdir}/hicolor/*/apps/%{name}.png
-
 
