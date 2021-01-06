@@ -1,3 +1,6 @@
+%global _legacy_common_support 1
+
+
 Name:		grsync
 Version:	1.3.0
 Release:	1
