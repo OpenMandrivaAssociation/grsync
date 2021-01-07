@@ -27,6 +27,8 @@ hosts, its focus is to synchronize local directories.
 %setup -q
 
 %build
+export CC=gcc
+export CXX=g++
 %configure --disable-unity
 %make_build
 
