@@ -31,8 +31,7 @@ hosts, its focus is to synchronize local directories.
 %autopatch -p1
 
 %build
-#export CC=gcc
-#export CXX=g++
+
 %configure --disable-unity
 %make_build
 
@@ -46,14 +45,7 @@ convert -scale 32 pixmaps/%{name}.png %{buildroot}%{_iconsdir}/hicolor/32x32/app
 convert -scale 16 pixmaps/%{name}.png %{buildroot}%{_iconsdir}/hicolor/16x16/apps/%{name}.png
 %__install -D -m644 pixmaps/%{name}.png %{buildroot}%{_iconsdir}/hicolor/128x128/apps/
 
-# Desktop file
-#__perl -p -i -e 's/grsync.png/grsync/g' %{buildroot}%{_datadir}/applications/%{name}.desktop
-#desktop-file-install --vendor="" \
-#  --remove-category="Application" \
-#  --add-category="Filesystem" \
-#  --add-category="X-MandrivaLinux-System-FileTools" \
-#  --dir %{buildroot}%{_datadir}/applications %{buildroot}%{_datadir}/applications/*
-
+# Desktop
 desktop-file-install \
     --remove-category=Application \
     --add-category=FileTransfer \
