@@ -43,12 +43,19 @@ convert -scale 16 pixmaps/%{name}.png %{buildroot}%{_iconsdir}/hicolor/16x16/app
 %__install -D -m644 pixmaps/%{name}.png %{buildroot}%{_iconsdir}/hicolor/128x128/apps/
 
 # Desktop file
-%__perl -p -i -e 's/grsync.png/grsync/g' %{buildroot}%{_datadir}/applications/%{name}.desktop
-desktop-file-install --vendor="" \
-  --remove-category="Application" \
-  --add-category="Filesystem" \
-  --add-category="X-MandrivaLinux-System-FileTools" \
-  --dir %{buildroot}%{_datadir}/applications %{buildroot}%{_datadir}/applications/*
+#__perl -p -i -e 's/grsync.png/grsync/g' %{buildroot}%{_datadir}/applications/%{name}.desktop
+#desktop-file-install --vendor="" \
+#  --remove-category="Application" \
+#  --add-category="Filesystem" \
+#  --add-category="X-MandrivaLinux-System-FileTools" \
+#  --dir %{buildroot}%{_datadir}/applications %{buildroot}%{_datadir}/applications/*
+
+desktop-file-install \
+    --remove-category=Application \
+    --add-category=FileTransfer \
+    --add-category=GTK \
+    --dir=%{buildroot}%{_datadir}/applications/ \
+    %{buildroot}/%{_datadir}/applications/%{name}.desktop
 
 # Fix EOLs
 dos2unix NEWS AUTHORS README
