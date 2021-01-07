@@ -9,6 +9,9 @@ License:	GPLv2
 Group:		File tools
 URL:		http://www.opbyte.it/grsync/
 Source0:	http://www.opbyte.it/release/%{name}-%{version}.tar.gz
+# https://sourceforge.net/p/grsync/patches/9/?limit=25
+Patch0:     patch-src-callbacks.c.patch
+
 BuildRequires:	pkgconfig
 BuildRequires:	pkgconfig(gtk+-3.0)
 BuildRequires:	perl-XML-Parser
@@ -25,10 +28,11 @@ hosts, its focus is to synchronize local directories.
 
 %prep
 %setup -q
+%autopatch -p1
 
 %build
-export CC=gcc
-export CXX=g++
+#export CC=gcc
+#export CXX=g++
 %configure --disable-unity
 %make_build
 
