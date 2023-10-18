@@ -11,7 +11,7 @@ URL:		http://www.opbyte.it/grsync/
 Source0:    https://sourceforge.net/projects/grsync/files/grsync-%{version}.tar.gz
 #Source0:	http://www.opbyte.it/release/%{name}-%{version}.tar.gz
 # https://sourceforge.net/p/grsync/patches/9/?limit=25
-Patch0:     patch-src-callbacks.c.patch
+#Patch0:     patch-src-callbacks.c.patch
 
 BuildRequires:	pkgconfig
 BuildRequires:	pkgconfig(gtk+-3.0)
