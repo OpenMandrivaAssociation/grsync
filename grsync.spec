@@ -7,7 +7,7 @@ Release:	1
 Summary:	A GTK GUI for rsync
 License:	GPLv2
 Group:		File tools
-URL:		http://www.opbyte.it/grsync/
+URL:		https://www.opbyte.it/grsync/
 Source0:    https://sourceforge.net/projects/grsync/files/grsync-%{version}.tar.gz
 #Source0:	http://www.opbyte.it/release/%{name}-%{version}.tar.gz
 # https://sourceforge.net/p/grsync/patches/9/?limit=25
