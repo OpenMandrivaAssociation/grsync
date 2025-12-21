@@ -13,6 +13,11 @@ Source0:    https://sourceforge.net/projects/grsync/files/grsync-%{version}.tar.
 # https://sourceforge.net/p/grsync/patches/9/?limit=25
 #Patch0:     patch-src-callbacks.c.patch
 
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	pkgconfig
 BuildRequires:	pkgconfig(gtk+-3.0)
 BuildRequires:	perl-XML-Parser
